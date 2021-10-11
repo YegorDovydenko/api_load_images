@@ -6,6 +6,7 @@ export const useLoadContent = () => {
   const [allItems, setAllItems] = useState([]);
   const [imgList, setImgList] = useState([]);
   const [displayedImgs, setdisplayedImgs] = useState(0);
+  const [nothingFound, setNothingFound] = useState('')
 
   const handleShowMore = () => {
     if(allItems){
@@ -25,12 +26,20 @@ export const useLoadContent = () => {
 
   const getContent = useCallback(async (value) => {
     setAllItems([])
+    setNothingFound('')
 
-    const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${value}`)
-    const data = await response.json()
+    try{
+      const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${value}`)
+      const data = await response.json()
+      setNothingFound(data.results[0].id)
+      setAllItems(data.results)
+    }
+    catch{
+      setNothingFound(`Nothing was found for the query "${value}"`)
+    }
+    
+  }, []) 
 
-    setAllItems(data.results)
-  }, [])
 
   const FetchMore = () =>{
     if(allItems.length - displayedImgs > 0){
@@ -41,5 +50,5 @@ export const useLoadContent = () => {
     else return null
   }
 
-  return {imgList, getContent, FetchMore}
+  return {imgList, nothingFound, getContent, FetchMore}
 }
