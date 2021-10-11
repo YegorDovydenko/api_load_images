@@ -4,7 +4,7 @@ import { useLoadContent } from "../hooks/useLoadContent";
 import "./App.css";
 
 const App = () => {
-  const {imgList, getContent, FetchMore} = useLoadContent();
+  const {imgList, nothingFound, getContent, FetchMore} = useLoadContent();
 
   return (
     <div className="App">
@@ -19,9 +19,8 @@ const App = () => {
             <FetchMore  />
           </>
           : 
-          null
+          <h2>{nothingFound}</h2>
         }
-        
       </div>      
     </div>
   );
