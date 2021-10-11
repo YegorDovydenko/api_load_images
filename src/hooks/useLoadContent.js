@@ -8,11 +8,14 @@ export const useLoadContent = () => {
   const [displayedImgs, setdisplayedImgs] = useState(0);
 
   const handleShowMore = () => {
-    const delta = allItems.length - displayedImgs
-    const showAmount = delta > 10 ? 10 : delta
+    if(allItems){
+      const delta = allItems.length - displayedImgs
+      const showAmount = delta > 10 ? 10 : delta
 
-    setdisplayedImgs(displayedImgs + showAmount)
-    setImgList(allItems.slice(0, displayedImgs + showAmount))
+      setdisplayedImgs(displayedImgs + showAmount)
+      setImgList(allItems.slice(0, displayedImgs + showAmount))
+    }
+    else return null
   }
 
   useEffect(() => {
@@ -21,6 +24,7 @@ export const useLoadContent = () => {
   }, [allItems])
 
   const getContent = useCallback(async (value) => {
+    setAllItems([])
 
     const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${value}`)
     const data = await response.json()
