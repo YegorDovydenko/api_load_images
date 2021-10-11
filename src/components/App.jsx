@@ -11,8 +11,17 @@ const App = () => {
       <Header onSearch={getContent} />
       <div className="main">
         <h1>Simple content list</h1>
-        <ContentList content={imgList} />
-        <FetchMore  />
+        {
+          imgList.length   
+          ?
+          <>
+            <ContentList content={imgList} />
+            <FetchMore  />
+          </>
+          : 
+          null
+        }
+        
       </div>      
     </div>
   );
