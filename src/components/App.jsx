@@ -12,7 +12,7 @@ const App = () => {
       <div className="main">
         <h1>Simple content list</h1>
         {
-          imgList.length   
+          imgList.length > 0
           ?
           <>
             <ContentList content={imgList} />
