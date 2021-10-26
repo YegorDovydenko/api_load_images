@@ -1,3 +1,1 @@
-## Completed task Abiatec
-
-All tasks completed, including Bonus.
+## Load images by submit input (img name)
